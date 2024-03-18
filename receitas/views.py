@@ -9,18 +9,25 @@ from receitas.models import Receita
 @csrf_exempt  
 def receitas(request):         
     data = requests.get('https://receitas-7953c-default-rtdb.firebaseio.com/receitas.json')
+    receitas=[]
+    for i in dict(data.json()):
+        receita = Receita()
+        receitas.append(receita.montar_objeto(data,i))    
 
     if request.method == 'GET': #Obter todos os registros de receitas.   
-            return HttpResponse(data)
+            return render(request, 'receitas/pages/home.html', context={
+        'receitas': receitas,
+    })
                             
                             
     elif request.method == 'POST': #Insere uma nova receita.
 
             data_form = request.POST
+           
+            receita = Receita()
+            arquivo = receita.criar_dicionario(dict(data_form), data)
 
             
-            receita = Receita()
-            arquivo = receita.criar(dict(data_form), data)
 
 
             requisicao = requests.post("https://receitas-7953c-default-rtdb.firebaseio.com/receitas.json", json= arquivo)
@@ -46,8 +53,10 @@ def receita(request,id):
 
         data_form = request.POST
 
+        print(dict(data_form))
+
         receita = Receita()
-        arquivo = receita.atualizar(dict(data_form), data,nome)
+        arquivo = receita.atualizar(data_form, data,nome)
                 
         requisicao = requests.put("https://receitas-7953c-default-rtdb.firebaseio.com/receitas/"+ nome +".json", json = arquivo)
         
