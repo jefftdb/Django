@@ -16,21 +16,23 @@ fake = Faker('pt_BR')
 
 class Receita():
 
-    def montar_objeto(self,data,i):
-          
+    def montar_objeto(self,data,i):          
 
         self.id = data.json()[i]['id']
         self.title = data.json()[i]['title']
         self.description = data.json()[i]['description']
         self.slug =  i
         self.preparation_time = data.json()[i]['preparation_time']
-        self.servings_time = data.json()[i]['servings']
-        self.servings_unity = data.json()[i]['servings_unit']
+        self.preparation_time_unit =  'Minutos'
+        self.servings = data.json()[i]['servings']
+        self.servings_unit = data.json()[i]['servings_unit']
         self.preparation_steps = data.json()[i]['preparation_steps']
-        self.created_at = data.json()[i]['created_at'] 
+        self.created_at_date = data.json()[i]['created_at_date'] 
+        self.created_at_hour = data.json()[i]['created_at_hour'] 
         self.cover = data.json()[i]['cover'] 
         self.category = data.json()[i]['category']['name']
-        self.author = data.json()[i]['author']['first_name'] +" "+data.json()[i]['author']['last_name']
+        self.author_first_name = data.json()[i]['author']['first_name']
+        self.author_last_name = data.json()[i]['author']['last_name']
                                 
         return (self)
 
@@ -39,14 +41,15 @@ class Receita():
         receita = {    
         
         'id': self.auto_increment(data),
-        'title': data_form['title'],
+        'title': data_form['title'][0],
         'description': fake.sentence(nb_words=12),
         'preparation_time': fake.random_number(digits=2, fix_len=True),
         'preparation_time_unit': 'Minutos',
         'servings': fake.random_number(digits=2, fix_len=True),
         'servings_unit': 'Porção',
         'preparation_steps': fake.text(3000),
-        'created_at': datetime.now().strftime("%d/%m/%Y"),
+        'created_at_date': datetime.now().strftime("%d/%m/%Y"),
+        'created_at_hour': datetime.now().strftime("%H:%M") ,
         'author': {
             'first_name': fake.first_name(),
             'last_name': fake.last_name(),
@@ -55,7 +58,7 @@ class Receita():
             'name': fake.word()
         },
         'cover': {
-            'url': 'https://loremflickr.com/%s/%s/food,cook' % rand_ratio(),
+            'url': 'https://loremflickr.com/%i/%i/food,cook' % rand_ratio(),
         }
     }
 
