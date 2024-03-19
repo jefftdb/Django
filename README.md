@@ -6,7 +6,7 @@
 
 # Agora ative o ambiente virtual:
 ```
-$ souce venv/scripts/activate
+$ source venv/scripts/activate
 ```
 # Instale as bibliotecas necessarias:
 ```
