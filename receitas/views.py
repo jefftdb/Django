@@ -29,9 +29,7 @@ def receitas(request):
         data_form = request.POST
         
         receita = Receita()
-        arquivo = receita.criar(dict(data_form), data)
-
-        
+        arquivo = receita.criar(dict(data_form), data)        
 
 
         requisicao = requests.post("https://receitas-7953c-default-rtdb.firebaseio.com/receitas.json", json= arquivo)
@@ -44,36 +42,34 @@ def receitas(request):
 def receita(request,id): 
     data = requests.get('https://receitas-7953c-default-rtdb.firebaseio.com/receitas.json')
     
-    receitas = []
+    
     for i in dict(data.json()):
-        if int(data.json()[i]['id']) == int(id):
-                nome = i
+        if int(data.json()[i]['id']) == int(id):                
                 receita = Receita()
-                receitas.append(receita.montar_objeto(data,i)) 
+                receita.montar_objeto(data,i) 
 
     if request.method == 'GET': #Obter a receita pelo id.   
-        receita = requests.get('https://receitas-7953c-default-rtdb.firebaseio.com/receitas/'+ nome +'.json')
-                             
+                                     
         return render(request, 'receitas/pages/recipe-view.html', context={
-        'receitas': receitas,
+        'recipe': receita,
     })
     
     elif request.method == 'POST': #Edita a receita pelo id          
 
         data_form = request.POST
 
-        print(dict(data_form))
-
-        receita = Receita()
-        arquivo = receita.atualizar(data_form, data,nome)
                 
-        requisicao = requests.put("https://receitas-7953c-default-rtdb.firebaseio.com/receitas/"+ nome +".json", json = arquivo)
-        
-        return HttpResponse(requisicao)
+        arquivo = receita.atualizar(data_form, data,receita.slug)
+
+        requisicao = requests.put("https://receitas-7953c-default-rtdb.firebaseio.com/receitas/"+ receita.slug +".json", json=dict(arquivo))
+                                   
+        return render(request, 'receitas/pages/recipe-view.html', context={
+        'recipe': receita,
+    })
     
     elif request.method == 'DELETE': #Deleta a receita
 
-        requisicao = requests.delete("https://receitas-7953c-default-rtdb.firebaseio.com/receitas/"+ nome +".json")
+        requisicao = requests.delete("https://receitas-7953c-default-rtdb.firebaseio.com/receitas/"+ receita.slug +".json")
     
         return HttpResponse(requisicao.status_code)# Envia a mensagem 200 se foi deletado com sucesso
 

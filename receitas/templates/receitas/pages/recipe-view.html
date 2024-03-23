@@ -3,10 +3,7 @@
 {% block title %}Receitas{% endblock title %}
 
 {% block content %}
-<div class="main-content main-content-detail container">
-    {% for recipe in receitas %}
-        {% include "receitas/partials/recipe.html" %}        
-    {% endfor %}
-    
+<div class="main-content main-content-detail container">    
+        {% include "receitas/partials/recipe.html" %}     
 </div>
 {% endblock content %}

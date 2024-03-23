@@ -76,7 +76,8 @@ class Receita():
             'servings': fake.random_number(digits=2, fix_len=True),
             'servings_unit': 'Porção',
             'preparation_steps': fake.text(3000),
-            'created_at': data.json()[nome]['created_at'],
+            'created_at_date': data.json()[nome]['created_at_date'],
+            'created_at_hour': data.json()[nome]['created_at_hour'] ,
             'author': {
                 'first_name': data_form['author'],
                 'last_name': fake.last_name(),
