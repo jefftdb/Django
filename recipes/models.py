@@ -3,10 +3,23 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Measure(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=65)
+
+
+class Ingredient(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=65)
+    amount = models.IntegerField()
+    measures = models.ForeignKey(Measure, on_delete=models.SET_NULL, null=True)
+
 class Category(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
 
 class Recipe(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=165)
     slug =  models.SlugField()
@@ -22,3 +35,6 @@ class Recipe(models.Model):
     cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    ingredients = models.ForeignKey(Ingredient, on_delete=models.SET_NULL, null=True)
+
+
