@@ -7,15 +7,25 @@ class Measure(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
 
+    def __str__(self):
+            return self.name
+
 class Ingredient(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
-    amount = models.IntegerField()
+    amount = models.CharField(max_length=65)
     measures = models.ForeignKey(Measure, on_delete=models.SET_NULL, null=True)
+        
+    def __str__(self):
+        return self.amount +" "+ self.measures.name +" "+ self.name +"(s)"
+
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
+
+    def __str__(self):
+        return self.name
 
 class Recipe(models.Model):
     id = models.AutoField(primary_key=True)
