@@ -47,10 +47,10 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(Ingredient,related_name="ingredients")
 
     def __str__(self):
-        return self.model
+        return self.title
     
-    def get_ingredients(self, obj):
-        return "\n".join([p.ingredient for p in obj.ingredients.all()])
+    def get_ingredients(self):
+        return "\n".join([i.__str__() for i in self.ingredients.all()])
 
 
 
