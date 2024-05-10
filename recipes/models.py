@@ -7,15 +7,25 @@ class Measure(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
 
+    def __str__(self):
+            return self.name
+
 class Ingredient(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
-    amount = models.IntegerField()
+    amount = models.CharField(max_length=65)
     measures = models.ForeignKey(Measure, on_delete=models.SET_NULL, null=True)
+        
+    def __str__(self):
+        return self.amount +" "+ self.measures.name +" "+ self.name +"(s)"
+
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
+
+    def __str__(self):
+        return self.name
 
 class Recipe(models.Model):
     id = models.AutoField(primary_key=True)
@@ -37,10 +47,10 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(Ingredient,related_name="ingredients")
 
     def __str__(self):
-        return self.model
+        return self.title
     
-    def get_ingredients(self, obj):
-        return "\n".join([p.ingredient for p in obj.ingredients.all()])
+    def get_ingredients(self):
+        return "\n".join([i.__str__() for i in self.ingredients.all()])
 
 
 
