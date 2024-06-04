@@ -3,12 +3,14 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Measure(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=65)
 
     def __str__(self):
-            return self.name
+        return self.name
+
 
 class Ingredient(models.Model):
     id = models.AutoField(primary_key=True)
@@ -26,6 +28,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Recipe(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,5 +1,4 @@
 from django import forms
-
 from .models import Recipe
 
 
@@ -7,7 +6,7 @@ class RecipeForms(forms.ModelForm):
     
     class Meta:
         model = Recipe
-        fields= [
+        fields = [
             'title',
             'description',
             'slug', 
@@ -23,17 +22,15 @@ class RecipeForms(forms.ModelForm):
             ]
 
         widgets = {
-
-            'title': forms.TextInput(attrs={'class':'form-control'}),
-            'description': forms.TextInput(attrs={'class':'form-control'}),
-            'slug': forms.TextInput(attrs={'class':'form-control'}),
-            'preparation_time': forms.TextInput(attrs={'class':'form-control'}),
-            'preparation_time_unity': forms.TextInput(attrs={'class':'form-control'}),
-            'servings_time': forms.TextInput(attrs={'class':'form-control'}),
-            'servings_unity': forms.TextInput(attrs={'class':'form-control'}),
-            'preparation_steps': forms.TextInput(attrs={'class':'form-control'}),
-            'category': forms.Select(attrs={'class':'form-control'}),
-            'author': forms.Select(attrs={'class':'form-control'}),
-            'ingredients': forms.Select(attrs={'class':'form-control'}),
-            
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'preparation_time': forms.TextInput(attrs={'class': 'form-control'}),
+            'preparation_time_unity': forms.TextInput(attrs={'class': 'form-control'}),
+            'servings_time': forms.TextInput(attrs={'class': 'form-control'}),
+            'servings_unity': forms.TextInput(attrs={'class': 'form-control'}),
+            'preparation_steps': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'author': forms.Select(attrs={'class': 'form-control'}),
+            'ingredients': forms.Select(attrs={'class': 'form-control'}),
         }
