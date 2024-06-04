@@ -47,13 +47,9 @@ class Recipe(models.Model):
     cover = models.ImageField(upload_to='recipes/static/recipes/img')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    ingredients = models.ManyToManyField(Ingredient,related_name="ingredients")
 
     def __str__(self):
         return self.title
-    
-    def get_ingredients(self):
-        return "\n".join([i.__str__() for i in self.ingredients.all()])
 
 
 

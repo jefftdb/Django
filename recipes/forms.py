@@ -18,7 +18,6 @@ class RecipeForms(forms.ModelForm):
             'cover',
             'category',
             'author',
-            'ingredients',
             ]
 
         widgets = {
@@ -32,5 +31,4 @@ class RecipeForms(forms.ModelForm):
             'preparation_steps': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'author': forms.Select(attrs={'class': 'form-control'}),
-            'ingredients': forms.Select(attrs={'class': 'form-control'}),
         }
