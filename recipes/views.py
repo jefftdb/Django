@@ -22,11 +22,11 @@ def recipe(request, id):
 @csrf_protect
 def new_recipe(request):
     if request.method == 'POST':
-        form = RecipeForms(request.POST)
+        form = RecipeForms(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             print("Formulário salvo com sucesso")
-            return redirect('home')
+            return redirect('recipes:home')
         else:
             print("Formulário inválido")
             print(form.errors)
