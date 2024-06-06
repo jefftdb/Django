@@ -52,8 +52,10 @@ def edit_recipe(request, recipe_id):
 
     return render(request, 'recipes/pages/edit_recipe.html', {'form': form, 'recipe_id': recipe_id})
 
-def delete_recipe(request):
-    pass
+def delete_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    recipe.delete()
+    return redirect('recipes:home')
 
 
 def login(request):
