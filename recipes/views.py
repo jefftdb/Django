@@ -35,9 +35,22 @@ def new_recipe(request):
     return render(request, 'recipes/pages/new_recipe.html', {'form': form})
 
 
-def edit_recipe(request):
-    pass
+def edit_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    form = RecipeForms(instance=recipe)
 
+    if request.method == 'POST':
+        form = RecipeForms(request.POST, request.FILES, instance=recipe)
+
+        if form.is_valid():
+            form.save()
+            print("Formulário editado com sucesso")
+            return redirect('recipes:home')
+        else:
+            print("Formulário inválido")
+            print(form.errors)
+
+    return render(request, 'recipes/pages/edit_recipe.html', {'form': form, 'recipe_id': recipe_id})
 
 def delete_recipe(request):
     pass
