@@ -1,3 +1,4 @@
+
 <div class="recipe recipe-list-item">
     <div class="recipe-cover">
         <a href="{% url "recipes:recipe" recipe.id %}">
@@ -60,6 +61,13 @@
         <div class="preparation-steps">
             {{ recipe.preparation_steps|linebreaksbr }}
         </div>
-    {% endif %}
 
+        <div class="recipe-meta-container">
+            <div class="recipe-meta recipe-preparation">
+                <a href="{% url "recipe:delete_recipe"}"><h3 class="recipe-meta-title"> Excluir Receita </h3></a>
+            </div>
+        </div>
+    {% endif %}
+    
+    
 </div>

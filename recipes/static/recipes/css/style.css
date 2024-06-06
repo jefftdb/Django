@@ -50,6 +50,7 @@
 
 .main-header-container {
     background: var(--color-primary-dark);
+    display: flex;
 }
 
 .main-logo {
@@ -63,6 +64,13 @@
     width: fit-content;
     margin: 0 auto;
 }
+
+.main-logo-second {
+    font-size: 2rem;
+    padding-top: 2rem;
+}
+
+
 
 .main-logo-icon {
     margin-right: 1.5rem;
@@ -245,3 +253,16 @@
 .main-footer a:hover {
     filter: brightness(.8);
 }
+
+.botton-new-recipe {
+    width: 400px;
+    border: 20px;
+    border-radius: 20px;
+}
+
+.div-botton-new-recipe {
+    text-align: center;
+    border: 100px
+}
+
+
